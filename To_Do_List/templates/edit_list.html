@@ -1,0 +1,56 @@
+{% include "bootstrap5_cdn.html" %}
+{% include "css.html" %}
+{% if not val %}<div tabindex="0" data-toggle="tooltip" title="No Task Present">{% endif %}
+<button class="btn btn-primary b2 bb my-auto border border-dark" data-bs-toggle="modal" data-bs-target="#exampleModalToggle"  style="font-size:1vw;" data-backdrop="false" {% if not val %}disabled{% endif %}><strong>Edit Task</strong></button>
+{% if not val %}</div>{% endif %}
+<div class="modal fade" data-backdrop="false" id="exampleModalToggle" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div data-backdrop="false" class="modal-dialog">
+      <div data-backdrop="false" class="modal-content">
+        <div data-backdrop="false" class="modal-header">
+          <h5 data-backdrop="false" class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+          <button data-backdrop="false" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" name="form_id" value="edit_list">
+            <div data-backdrop="false" class="modal-body">
+                <div  data-backdrop="false" class="list-group" style="overflow-y: auto; max-height: 10vw;" align="left">
+                  {% for i in val %}
+                      <label class="list-group-item container1">
+                        <input type="hidden" name="edit_id" value="{{i.field_no}}">
+                        <button data-backdrop="false" type="button" class="btn btn-info mx-1" data-bs-target="#exampleModalToggle2{{i.field_no}}" data-bs-toggle="modal">Edit</button>
+                            {{i.task}}
+                      </label>
+                      {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  {% for i in val %}
+<form method="POST" action="/" onSubmit="var div = document.getElementById('labelhide');if({{en}}!=0){div.style.display = 'none';}else{div.style.display = 'block';}">
+    {% csrf_token %}
+  <input type="hidden" name="form_id" value="edit_list">
+  <input type="hidden" name="form_id_data" value="{{i.field_no}}">
+  <div class="modal fade" data-backdrop="false" id="exampleModalToggle2{{i.field_no}}" aria-labelledby="exampleModalToggleLabel2{{i.field_no}}">
+    <div class="modal-dialog" data-backdrop="false">
+      <div class="modal-content" data-backdrop="false">
+        <div class="modal-header" data-backdrop="false">
+            <h5 class="modal-title" data-backdrop="false" id="exampleModalToggleLabel2{{i.field_no}}">Edit Details</h5>
+            <button data-backdrop="false" type="button" class="btn-close" onClick="location.reload();" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" data-backdrop="false">
+          <input type="text" class="form-control bg-light" placeholder="Task" name="task" value="{{i.task}}">
+                            <br>
+                            <textarea type="text" class="form-control bg-light" placeholder="Description" name="desc">{{i.desc}}</textarea>
+        </div>
+        <div class="modal-footer" data-backdrop="false">
+          <button data-backdrop="false" class="btn btn-primary" type="submit">Make Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+  {% endfor %}

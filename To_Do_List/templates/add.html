@@ -1,0 +1,42 @@
+{% include "bootstrap5_cdn.html" %}
+{% include "css.html" %}
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success b1 bb border border-dark"
+            data-toggle="modal" data-target="#exampleModal">
+            <p class="p1" style="font-size:1vw;"><strong>Add Item</strong></p>
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">
+                            Add Task to the List
+                        </h3>
+                        <button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">
+                                ×
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="/" onSubmit="var div = document.getElementById('labelhide');if({{en}}!=0){div.style.display = 'none';}else{div.style.display = 'block';}">
+                            {% csrf_token %}
+                            <input type="hidden" name="form_id" value="add_list">
+                            <input type="text" class="form-control bg-light" placeholder="Task" name="task">
+                            <br>
+                            <textarea type="text" class="form-control bg-light" placeholder="Description" name="desc"></textarea>
+                        
+                    
+                        <div class="modal-footer">
+                        <button onClick="var div = document.getElementById('labelhide');if({{en}}!=0){div.style.display = 'none';}else{div.style.display = 'block';}" type="submit" class="btn btn-success">
+                            Save
+                        </button>
+                    </div>
+                    </form>
+                    
+                </div>
+                </div>
+            </div>
+        </div>

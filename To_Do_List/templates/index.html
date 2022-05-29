@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>To Do List</title>
+        <link rel="icon" type="image/x-icon" href="../static/img/favicon.ico">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+        <script>
+            if ( window.history.replaceState ) {
+              window.history.replaceState( null, null, window.location.href );
+            }
+        </script>
+        {% include "css.html" %}
+        {% include "bootstrap5_cdn.html" %}
+        <script>
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+    </head>
+
+    <body class="bg1">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    <div>
+        <div class="container-fluid">
+            <div class = "row db1">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <h1 align="center" class="hd1">
+                        <p>
+                            <b>
+                                <span style="color:black;">To D</span><span style="color:red;">o</span><span style="color:white;"> List</span>
+                            </b>
+                        </p>
+                    </h1>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="row db3 py-2 d-flex" align="center">
+                <div class="db5 row">
+                    <div class="col-sm-3 py-2">
+                        {% include "add.html" %}
+                    </div>
+                    <div class="col-sm-3 db4 py-2">
+                        {% include "delete.html" %}
+                    </div>
+                    <div class="col-sm-3 db4 py-2 align-items-center">
+                        {% include "edit_list.html" %}
+                    </div>
+                    <div class="col-sm-3 db4 py-2 px-1">
+                        <form method="post" action = "/" onSubmit="var div = document.getElementById('labelhide');if({{en}}!=0){div.style.display = 'none';}else{div.style.display = 'block';}">
+                            {% csrf_token %}
+                            <input type="hidden" name="form_id" value="select_delete_list">
+                        {% if not val %}<div tabindex="0" data-toggle="tooltip"  title="No Task Finished">{% endif %}
+                        {% if not val2 %}<div tabindex="0" data-toggle="tooltip" title="No Task Finished">{% endif %}
+                        <button onClick="var div = document.getElementById('labelhide');if({{en}}!=0){div.style.display = 'none';}else{div.style.display = 'block';}"  type="submit" class="btn btn-danger b3 bb px-auto py-1 border border-dark" {% if not val %}disabled{% endif %} {% if not val2 %}disabled{% endif %}>
+                            <p class="p1 py-1" style="font-size:0.8vw;"><strong>Delete Completed Tasks</strong></p>
+                        </button>
+                        {% if not val %}</div>{% endif %} 
+                        {% if not val2 %}</div>{% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="row my-3 db2 mx-auto">
+                    <div class="bg2">
+                        <div class="card px-0" style="box-shadow: 2px 2px 2px rgba(224, 240, 168, 0.7);width: auto; border-radius:10px;">
+                            <div class="card-header">
+                            <h5 class="my-0">
+                                Tasks
+                            </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-light a1 px-0">
+                       {% include "list.html" %}
+                    </div>
+                    <div class="bg-light a1 px-0 my-2" style="opacity:50%">
+                        <div class = "bd-light my-2 mx-1" style="opacity: 100%;" id = "labelhide" align="center"><h5>No Tasks pending!!</h5></div>
+                    </div>
+                    <script>
+                        var div = document.getElementById("labelhide");  
+                        if ({{en}}!=0)
+                        {  
+                            div.style.display = "none";  
+                        }  
+                        else
+                        {  
+                            div.style.display = "block";  
+                        }  
+                    </script>
+                    <script type="text/javascript">
+                        $(function () {
+                            $("[rel='tooltip']").tooltip();
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

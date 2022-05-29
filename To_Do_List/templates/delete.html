@@ -1,0 +1,47 @@
+{% include "bootstrap5_cdn.html" %}
+{% include "css.html" %}
+        <!-- Button trigger modal -->
+        {% if not val %}<div tabindex="0" data-toggle="tooltip" title="No Task Present">{% endif %}
+        <button type="button" class="btn btn-warning b2 bb border border-dark" data-toggle="modal" data-target="#exampleModal2" {% if not val %}tabindex="0" data-toggle="tooltip" title="No Task Present" disabled{% endif %}>
+            <p class="p1" style="font-size:1vw;"><strong>Delete Item</strong></p>
+        </button>
+        {% if not val %}</div>{% endif %}
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal2">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">
+                            Select and Delete Items
+                        </h3>
+                        <button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">
+                                ×
+                            </span>
+                        </button>
+                    </div>
+                    <form method="POST" action="/" onSubmit="var div = document.getElementById('labelhide');if({{en}}!=0){div.style.display = 'none';}else{div.style.display = 'block';}">
+                        {% csrf_token %}
+                    <input type="hidden" name="form_id" value="delete_list">
+                    <div class="modal-body">
+                        <div class="list-group" align="left" style="overflow-y: auto; max-height: 10vw;">
+                            {% for i in val %}
+                              <label class="list-group-item container1">
+                                <input class="form-check-input me-1" type="checkbox" value="{{i.field_no}}" name="dc{{i.field_no}}">
+                                  <span class="checkmark">
+                                    {{i.task}}
+                                  </span>
+                              </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onClick="var div = document.getElementById('labelhide');if({{en}}!=0){div.style.display = 'none';}else{div.style.display = 'block';}"  type="submit" class="btn btn-danger">
+                            Delete
+                        </button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>

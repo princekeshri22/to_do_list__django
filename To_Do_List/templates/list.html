@@ -1,6 +1,5 @@
-{% include "bootstrap5_cdn.html" %}
+{% include "cdn_imports.html" %}
 {% include "css.html" %}
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <div class="list-group" style="box-shadow: 5px 5px; overflow-y: auto; max-height: 17vw;">
   <form id = "frm" method="post" action="/" onSubmit="var div = document.getElementById('labelhide');if({{en}}!=0){div.style.display = 'none';}else{div.style.display = 'block';}">
     {% csrf_token %}

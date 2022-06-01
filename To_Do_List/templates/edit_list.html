@@ -1,4 +1,4 @@
-{% include "bootstrap5_cdn.html" %}
+{% include "cdn_imports.html" %}
 {% include "css.html" %}
 {% if not val %}<div tabindex="0" data-toggle="tooltip" title="No Task Present">{% endif %}
 <button class="btn btn-primary b2 bb my-auto border border-dark" data-bs-toggle="modal" data-bs-target="#exampleModalToggle"  style="font-size:1vw;" data-backdrop="false" {% if not val %}disabled{% endif %}><strong>Edit Task</strong></button>

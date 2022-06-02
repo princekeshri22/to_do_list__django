@@ -103,7 +103,7 @@ def index_page(request):
             update.task = request.POST['task']
             update.desc = request.POST['desc']
             update.save()
-            pass
+            messages.success(request, 'Task Edited Successfully')
     
     lst = []
     if(not entry_check):

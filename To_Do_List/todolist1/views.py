@@ -4,7 +4,7 @@ from index_var_read import read_file
 from index_var_write import write_file
 from django.contrib import messages
 
-# Create your views here.
+
 def index_page(request):
     b = 0
     entry_check = 0 != List.objects.all().values().count()
@@ -74,7 +74,7 @@ def index_page(request):
                         new_text = new_text.strip()
                         write_file("field_no.txt", new_text)
                         write_file("field_no.txt", new_text)
-            # return HttpResponse(b)
+
             temp_list = b[0]
             if(b[0]!=None):
                 messages.warning(request, 'Task Deleted')

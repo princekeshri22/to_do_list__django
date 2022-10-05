@@ -10,7 +10,7 @@ To install django - `pip install django`
 
 Now you are good to go.
 
-
+django library is used
 This Code has a Bug, find it if you can😉
 Every CDN link is present in cdn_imports.html file in Templates folder
 If you face issues regarding loading of the site then your network bandwidth maybe low.
